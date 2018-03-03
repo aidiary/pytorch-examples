@@ -170,8 +170,8 @@ def train(D, G, criterion, D_optimizer, G_optimizer, data_loader):
         G_optimizer.step()
         G_running_loss += G_loss.data[0]
     
-    D_running_loss /= len(train_loader)
-    G_running_loss /= len(train_loader)
+    D_running_loss /= len(data_loader)
+    G_running_loss /= len(data_loader)
     
     return D_running_loss, G_running_loss
 
