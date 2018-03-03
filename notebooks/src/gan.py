@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import torch
 import torch.nn as nn
@@ -187,7 +188,7 @@ def visualize(epoch, G, log_dir='logs'):
     sample_z = Variable(sample_z, volatile=True)
     
     # Generatorでサンプル生成
-    samples = G(sample_z).cpu().data()
+    samples = G(sample_z).data.cpu()
     save_image(samples, os.path.join(log_dir, 'epoch_%03d.png' % (epoch)))
 
 for epoch in range(num_epochs + 1):
@@ -196,4 +197,3 @@ for epoch in range(num_epochs + 1):
     print('epoch %d, D_loss: %.4f G_loss: %.4f' % (epoch, D_loss, G_loss))
     torch.save(G.state_dict(), os.path.join(log_dir, 'G_%03d.pth' % epoch))
     torch.save(D.state_dict(), os.path.join(log_dir, 'D_%03d.pth' % epoch))
-
