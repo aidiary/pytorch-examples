@@ -134,8 +134,6 @@ def train(D, G, criterion, D_optimizer, G_optimizer, data_loader):
     D_running_loss = 0
     G_running_loss = 0
     for batch_idx, (real_images, _) in enumerate(data_loader):
-        print(batch_idx)
-
         z = torch.rand((batch_size, z_dim))
         if cuda:
             real_images, z = real_images.cuda(), z.cuda()
@@ -169,7 +167,7 @@ def train(D, G, criterion, D_optimizer, G_optimizer, data_loader):
         G_loss.backward()
         G_optimizer.step()
         G_running_loss += G_loss.data[0]
-    
+
     D_running_loss /= len(data_loader)
     G_running_loss /= len(data_loader)
     
